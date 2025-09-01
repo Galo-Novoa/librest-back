@@ -8,6 +8,7 @@ class MercadoWebBackApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Teste de contexto
 	}
 
 }
