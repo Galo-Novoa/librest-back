@@ -1,19 +1,25 @@
 package com.galonovoa.mercado.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Producto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String descripcion;
     private double precio;
+    private String descripcion;
     private String imagen;
 
     public Producto() {}
-
-    public Producto(Long id, String nombre, String descripcion, double precio, String imagen) {
-        this.id = id;
+    public Producto(String nombre, double precio, String descripcion, String imagen) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
+        this.descripcion = descripcion;
         this.imagen = imagen;
     }
 
