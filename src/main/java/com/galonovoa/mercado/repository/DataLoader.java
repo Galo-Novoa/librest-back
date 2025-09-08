@@ -1,4 +1,4 @@
-package com.galonovoa.mercado;
+package com.galonovoa.mercado.repository;
 import com.galonovoa.mercado.model.Producto;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
