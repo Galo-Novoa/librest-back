@@ -1,28 +1,28 @@
 package com.galonovoa.mercado.service;
 
-import com.galonovoa.mercado.model.Producto;
-import com.galonovoa.mercado.repository.ProductoRepository;
+import com.galonovoa.mercado.model.Product;
+import com.galonovoa.mercado.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductoService {
+public class ProductService {
 
-    private final ProductoRepository repository;
+    private final ProductRepository repository;
 
-    public ProductoService(ProductoRepository repository) {
+    public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
 
-    public List<Producto> obtenerProductos() {
+    public List<Product> getProducts() {
         return repository.findAll();
     }
 
-    public Producto guardarProducto(Producto p) {
+    public Product saveProduct(Product p) {
         return repository.save(p);
     }
 
-    public void eliminarProducto(Long id) {
+    public void deleteProduct(Long id) {
         repository.deleteById(id);
     }
 }

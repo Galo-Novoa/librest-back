@@ -1,6 +1,6 @@
 package com.galonovoa.mercado.repository;
-import com.galonovoa.mercado.model.Producto;
+import com.galonovoa.mercado.model.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductoRepository extends JpaRepository<Producto, Long> {}
+public interface ProductRepository extends JpaRepository<Product, Long> {}
