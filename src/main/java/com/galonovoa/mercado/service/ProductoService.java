@@ -17,4 +17,12 @@ public class ProductoService {
     public List<Producto> obtenerProductos() {
         return repository.findAll();
     }
+
+    public Producto guardarProducto(Producto p) {
+        return repository.save(p);
+    }
+
+    public void eliminarProducto(Long id) {
+        repository.deleteById(id);
+    }
 }
