@@ -2,13 +2,11 @@ package com.galonovoa.mercado;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class MercadoWebBackApplicationTests {
-
-	@Test
-	void contextLoads() {
-		// Teste de contexto
-	}
-
+    @Test
+    void contextLoads() {}
 }
