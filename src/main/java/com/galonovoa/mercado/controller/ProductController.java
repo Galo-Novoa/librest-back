@@ -1,14 +1,10 @@
 package com.galonovoa.mercado.controller;
+
 import com.galonovoa.mercado.model.Product;
+import com.galonovoa.mercado.dto.ProductDTO;
 import com.galonovoa.mercado.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import com.galonovoa.mercado.repository.ProductRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
@@ -26,12 +22,29 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product newProduct) {
-        return service.saveProduct(newProduct);
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDTO productDTO) {
+        Product product = new Product(
+            productDTO.getName(),
+            productDTO.getPrice(),
+            productDTO.getDescription(),
+            productDTO.getImage()
+        );
+        Product saved = service.saveProduct(product);
+        return ResponseEntity.ok(saved);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         service.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(
+        @PathVariable Long id,
+        @RequestBody ProductDTO updatesDTO
+    ) {
+        Product updated = service.updateProduct(id, updatesDTO);
+        return ResponseEntity.ok(updated);
     }
 }
