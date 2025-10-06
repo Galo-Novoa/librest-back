@@ -1,10 +1,11 @@
 package com.galonovoa.mercado.service;
 
 import com.galonovoa.mercado.model.Product;
-import com.galonovoa.mercado.dto.ProductDTO;
 import com.galonovoa.mercado.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -27,21 +28,21 @@ public class ProductService {
         repository.deleteById(id);
     }
 
-    public Product updateProduct(Long id, ProductDTO updates) {
+    public Product updateProductPartial(Long id, Map<String, Object> updates) {
         Product product = repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        if (updates.getName() != null) {
-            product.setName(updates.getName());
+        if (updates.get("name") != null) {
+            product.setName(updates.get("name").toString());
         }
-        if (updates.getPrice() != null) {
-            product.setPrice(updates.getPrice());
+        if (updates.get("price") != null) {
+            product.setPrice(new BigDecimal(updates.get("price").toString()));
         }
-        if (updates.getDescription() != null) {
-            product.setDescription(updates.getDescription());
+        if (updates.get("description") != null) {
+            product.setDescription(updates.get("description").toString());
         }
-        if (updates.getImage() != null) {
-            product.setImage(updates.getImage());
+        if (updates.get("image") != null) {
+            product.setImage(updates.get("image").toString());
         }
 
         return repository.save(product);

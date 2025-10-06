@@ -1,15 +1,17 @@
 package com.galonovoa.mercado.controller;
 
 import com.galonovoa.mercado.model.Product;
-import com.galonovoa.mercado.dto.ProductDTO;
 import com.galonovoa.mercado.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
     private final ProductService service;
 
     public ProductController(ProductService service) {
@@ -22,29 +24,29 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Product> addProduct(@RequestBody Map<String, Object> productDTO) {
         Product product = new Product(
-            productDTO.getName(),
-            productDTO.getPrice(),
-            productDTO.getDescription(),
-            productDTO.getImage()
+            productDTO.get("name").toString(),
+            new java.math.BigDecimal(productDTO.get("price").toString()),
+            productDTO.get("description").toString(),
+            productDTO.get("image").toString()
         );
         Product saved = service.saveProduct(product);
         return ResponseEntity.ok(saved);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Product> updateProductPartial(
+        @PathVariable Long id,
+        @RequestBody Map<String, Object> updates
+    ) {
+        Product updated = service.updateProductPartial(id, updates);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         service.deleteProduct(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(
-        @PathVariable Long id,
-        @RequestBody ProductDTO updatesDTO
-    ) {
-        Product updated = service.updateProduct(id, updatesDTO);
-        return ResponseEntity.ok(updated);
     }
 }
