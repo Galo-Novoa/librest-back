@@ -39,7 +39,12 @@ tasks.named('test') {
 
 sonar {
   properties {
-    property "sonar.projectKey", "Galo-Novoa_mercado-web-back"
+    property "sonar.projectKey", "Galo-Novoa_librest-back"
     property "sonar.organization", "galo-novoa"
   }
+}
+
+bootJar {
+    archiveBaseName = 'librest-back'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }

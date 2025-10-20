@@ -1,6 +1,6 @@
-package com.galonovoa.mercado.config;
+package com.galonovoa.librest.config;
 
-import com.galonovoa.mercado.service.CategoryService;
+import com.galonovoa.librest.service.CategoryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

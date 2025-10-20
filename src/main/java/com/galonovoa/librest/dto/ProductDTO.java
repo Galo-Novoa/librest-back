@@ -1,4 +1,4 @@
-package com.galonovoa.mercado.dto;
+package com.galonovoa.librest.dto;
 
 import java.math.BigDecimal;
 

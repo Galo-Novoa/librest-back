@@ -1,8 +1,8 @@
-package com.galonovoa.mercado.service;
+package com.galonovoa.librest.service;
 
-import com.galonovoa.mercado.model.CartItem;
-import com.galonovoa.mercado.model.Product;
-import com.galonovoa.mercado.repository.CartItemRepository;
+import com.galonovoa.librest.model.CartItem;
+import com.galonovoa.librest.model.Product;
+import com.galonovoa.librest.repository.CartItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

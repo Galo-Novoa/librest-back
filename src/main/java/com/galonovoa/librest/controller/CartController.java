@@ -1,9 +1,9 @@
-package com.galonovoa.mercado.controller;
+package com.galonovoa.librest.controller;
 
-import com.galonovoa.mercado.model.CartItem;
-import com.galonovoa.mercado.model.Product;
-import com.galonovoa.mercado.service.CartService;
-import com.galonovoa.mercado.service.ProductService;
+import com.galonovoa.librest.model.CartItem;
+import com.galonovoa.librest.model.Product;
+import com.galonovoa.librest.service.CartService;
+import com.galonovoa.librest.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

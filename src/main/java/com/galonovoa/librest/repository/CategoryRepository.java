@@ -1,6 +1,6 @@
-package com.galonovoa.mercado.repository;
+package com.galonovoa.librest.repository;
 
-import com.galonovoa.mercado.model.Category;
+import com.galonovoa.librest.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;

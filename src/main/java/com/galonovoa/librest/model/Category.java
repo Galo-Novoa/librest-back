@@ -1,4 +1,4 @@
-package com.galonovoa.mercado.model;
+package com.galonovoa.librest.model;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;

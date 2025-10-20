@@ -1,4 +1,4 @@
-package com.galonovoa.mercado.config;
+package com.galonovoa.librest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

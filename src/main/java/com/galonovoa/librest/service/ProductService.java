@@ -1,7 +1,7 @@
-package com.galonovoa.mercado.service;
+package com.galonovoa.librest.service;
 
-import com.galonovoa.mercado.model.Product;
-import com.galonovoa.mercado.repository.ProductRepository;
+import com.galonovoa.librest.model.Product;
+import com.galonovoa.librest.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;

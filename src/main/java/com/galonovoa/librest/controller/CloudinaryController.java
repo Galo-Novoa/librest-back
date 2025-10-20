@@ -1,4 +1,4 @@
-package com.galonovoa.mercado.controller;
+package com.galonovoa.librest.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,7 @@
-package com.galonovoa.mercado.service;
+package com.galonovoa.librest.service;
 
-import com.galonovoa.mercado.model.Category;
-import com.galonovoa.mercado.repository.CategoryRepository;
+import com.galonovoa.librest.model.Category;
+import com.galonovoa.librest.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
