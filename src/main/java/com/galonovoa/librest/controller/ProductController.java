@@ -47,9 +47,14 @@ public class ProductController {
         product.setImage(productDTO.get("image").toString());
         product.setRating(productDTO.containsKey("rating") ? Double.parseDouble(productDTO.get("rating").toString()) : 0.0);
         product.setPublisher(productDTO.containsKey("publisher") ? productDTO.get("publisher").toString() : "admin");
-        product.setDateAdded(productDTO.containsKey("dateAdded") ? LocalDateTime.parse(productDTO.get("dateAdded").toString()) : LocalDateTime.now());
+        
+        // USAR FECHA ACTUAL DEL SERVIDOR
+        product.setDateAdded(LocalDateTime.now());
+        
         product.setSale(productDTO.containsKey("sale") ? Integer.parseInt(productDTO.get("sale").toString()) : 0);
         product.setCategory(category);
+        
+        // ✅ USAR service.saveProduct() en lugar de repository
         Product saved = service.saveProduct(product);
         return ResponseEntity.ok(saved);
     }
@@ -59,13 +64,23 @@ public class ProductController {
         @PathVariable Long id,
         @RequestBody Map<String, Object> updates
     ) {
-        Product updated = service.updateProductPartial(id, updates);
-        return ResponseEntity.ok(updated);
+        try {
+            // ✅ USAR service.updateProductPartial() - este método ya maneja todo
+            Product updated = service.updateProductPartial(id, updates);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-        service.deleteProduct(id);
-        return ResponseEntity.noContent().build();
+        try {
+            // ✅ USAR service.deleteProduct()
+            service.deleteProduct(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
