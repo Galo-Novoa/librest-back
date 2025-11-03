@@ -31,6 +31,10 @@ dependencies {
 	testRuntimeOnly 'org.hsqldb:hsqldb:2.7.2'
 	implementation 'com.cloudinary:cloudinary-http44:1.31.0'
 	implementation 'io.github.cdimascio:dotenv-java:3.1.0'
+	implementation 'org.springframework.boot:spring-boot-starter-security' // ← AGREGAR ESTA
+  implementation 'io.jsonwebtoken:jjwt-api:0.11.5' // ← AGREGAR ESTA
+  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5' // ← AGREGAR ESTA
+  runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // ← AGREGAR ESTA
 }
 
 tasks.named('test') {
