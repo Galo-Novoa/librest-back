@@ -14,15 +14,18 @@ public class Product {
     private String description;
     private String image;
 
-    private static final String DEFAULT_PUBLISHER = "admin";
-    
     // Campos existentes
     private Double rating = 0.0;
-    private String publisher = DEFAULT_PUBLISHER;
+    
+    // Relación con User (propietario del producto)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    
     private LocalDateTime dateAdded = LocalDateTime.now();
     private Integer sale = 0;
 
-    // Nuevo campo: Categoría
+    // Relación con Categoría
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -43,26 +46,22 @@ public class Product {
         this.image = image;
         if (options != null) {
             this.rating = options.rating != null ? options.rating : 0.0;
-            this.publisher = options.publisher != null ? options.publisher : DEFAULT_PUBLISHER;
+            this.user = options.user;
             this.dateAdded = options.dateAdded != null ? options.dateAdded : LocalDateTime.now();
             this.sale = options.sale != null ? options.sale : 0;
             this.category = options.category;
         } else {
             this.rating = 0.0;
-            this.publisher = DEFAULT_PUBLISHER;
+            this.user = null;
             this.dateAdded = LocalDateTime.now();
             this.sale = 0;
             this.category = null;
         }
     }
 
-    /**
-     * Helper class to group optional product parameters and keep constructor parameter count low.
-     * Usage: new Product(name, price, desc, image, ProductOptions.builder().rating(4.5).publisher("x").build());
-     */
     public static class ProductOptions {
         private Double rating;
-        private String publisher;
+        private User user;  // ✅ Cambiado de String publisher a User user
         private LocalDateTime dateAdded;
         private Integer sale;
         private Category category;
@@ -73,13 +72,13 @@ public class Product {
 
         public static class Builder {
             private Double rating;
-            private String publisher;
+            private User user;  // ✅ Cambiado de publisher a user
             private LocalDateTime dateAdded;
             private Integer sale;
             private Category category;
 
             public Builder rating(Double rating) { this.rating = rating; return this; }
-            public Builder publisher(String publisher) { this.publisher = publisher; return this; }
+            public Builder user(User user) { this.user = user; return this; }  // ✅ Cambiado
             public Builder dateAdded(LocalDateTime dateAdded) { this.dateAdded = dateAdded; return this; }
             public Builder sale(Integer sale) { this.sale = sale; return this; }
             public Builder category(Category category) { this.category = category; return this; }
@@ -87,7 +86,7 @@ public class Product {
             public ProductOptions build() {
                 ProductOptions opts = new ProductOptions();
                 opts.rating = this.rating;
-                opts.publisher = this.publisher;
+                opts.user = this.user;  // ✅ Corregido
                 opts.dateAdded = this.dateAdded;
                 opts.sale = this.sale;
                 opts.category = this.category;
@@ -96,7 +95,15 @@ public class Product {
         }
     }
 
-    // Getters y Setters existentes...
+    public boolean isOwnedBy(String userEmail) {
+        return this.user != null && this.user.getEmail().equals(userEmail);
+    }
+
+    public String getPublisherEmail() {
+        return this.user != null ? this.user.getEmail() : null;
+    }
+
+    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
@@ -109,14 +116,12 @@ public class Product {
     public void setImage(String image) { this.image = image; }
     public Double getRating() { return rating; }
     public void setRating(Double rating) { this.rating = rating; }
-    public String getPublisher() { return publisher; }
-    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public User getUser() { return user; }  // ✅ Getter para User
+    public void setUser(User user) { this.user = user; }  // ✅ Setter para User
     public LocalDateTime getDateAdded() { return dateAdded; }
     public void setDateAdded(LocalDateTime dateAdded) { this.dateAdded = dateAdded; }
     public Integer getSale() { return sale; }
     public void setSale(Integer sale) { this.sale = sale; }
-    
-    // Nuevo getter y setter para categoría
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 }

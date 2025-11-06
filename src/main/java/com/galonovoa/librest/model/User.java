@@ -1,4 +1,3 @@
-// ./src/main/java/com/galonovoa/librest/model/User.java
 package com.galonovoa.librest.model;
 
 import jakarta.persistence.*;
@@ -123,5 +122,9 @@ public class User {
     @PreUpdate
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public boolean hasRole(ERole roleName) {
+    return roles.stream().anyMatch(role -> role.getName() == roleName);
     }
 }

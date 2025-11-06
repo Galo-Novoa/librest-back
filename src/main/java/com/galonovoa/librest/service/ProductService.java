@@ -8,14 +8,18 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import com.galonovoa.librest.model.User;
 
 @Service
 public class ProductService {
 
     private final ProductRepository repository;
+    private final AuthService authService;
 
-    public ProductService(ProductRepository repository) {
+    public ProductService(ProductRepository repository, AuthService authService) {
         this.repository = repository;
+        this.authService = authService;
     }
 
     public List<Product> getProducts() {
@@ -23,6 +27,10 @@ public class ProductService {
     }
 
     public Product saveProduct(@NonNull Product p) {
+        Optional<User> currentUser = authService.getCurrentUser();
+        if (currentUser.isPresent()) {
+            p.setUser(currentUser.get());
+        }
         return repository.save(p);
     }
 
