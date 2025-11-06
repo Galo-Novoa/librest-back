@@ -4,6 +4,7 @@ import com.galonovoa.librest.model.Category;
 import com.galonovoa.librest.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 
@@ -23,19 +24,19 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<Category> getCategoryById(@NonNull @PathVariable Long id) {
         return service.getCategoryById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
+    public Category createCategory(@NonNull @RequestBody Category category) {
         return service.createCategory(category);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category categoryDetails) {
+    public ResponseEntity<Category> updateCategory(@NonNull @PathVariable Long id, @RequestBody Category categoryDetails) {
         try {
             Category updated = service.updateCategory(id, categoryDetails);
             return ResponseEntity.ok(updated);
@@ -45,7 +46,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCategory(@NonNull @PathVariable Long id) {
         try {
             service.deleteCategory(id);
             return ResponseEntity.noContent().build();

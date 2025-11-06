@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'war'
-	id 'org.springframework.boot' version '3.5.6'
+	id 'org.springframework.boot' version '3.5.7'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id "org.sonarqube" version "6.3.1.5724"
 }
@@ -22,19 +22,31 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	
+	// Cloudinary
+	implementation 'com.cloudinary:cloudinary-http44:1.31.0'
+	
+	// Environment variables
+	implementation 'io.github.cdimascio:dotenv-java:3.1.0'
+	
+	// Database
+	runtimeOnly 'org.postgresql:postgresql'
+	
+	// Development & Testing
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	developmentOnly "org.springframework.boot:spring-boot-devtools"
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'org.postgresql:postgresql'
 	testRuntimeOnly 'org.hsqldb:hsqldb:2.7.2'
-	implementation 'com.cloudinary:cloudinary-http44:1.31.0'
-	implementation 'io.github.cdimascio:dotenv-java:3.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-security' // ← AGREGAR ESTA
-  implementation 'io.jsonwebtoken:jjwt-api:0.11.5' // ← AGREGAR ESTA
-  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5' // ← AGREGAR ESTA
-  runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // ← AGREGAR ESTA
+	
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
 tasks.named('test') {

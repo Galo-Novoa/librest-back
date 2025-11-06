@@ -2,6 +2,7 @@ package com.galonovoa.librest.service;
 
 import com.galonovoa.librest.model.Category;
 import com.galonovoa.librest.repository.CategoryRepository;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -19,15 +20,15 @@ public class CategoryService {
         return repository.findAllByOrderByNameAsc();
     }
 
-    public Optional<Category> getCategoryById(Long id) {
+    public Optional<Category> getCategoryById(@NonNull Long id) {
         return repository.findById(id);
     }
 
-    public Category createCategory(Category category) {
+    public Category createCategory(@NonNull Category category) {
         return repository.save(category);
     }
 
-    public Category updateCategory(Long id, Category categoryDetails) {
+    public Category updateCategory(@NonNull Long id, Category categoryDetails) {
         Category category = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
         
@@ -37,13 +38,15 @@ public class CategoryService {
         return repository.save(category);
     }
 
-    public void deleteCategory(Long id) {
+    @SuppressWarnings("null")
+    public void deleteCategory(@NonNull Long id) {
         Category category = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
         repository.delete(category);
     }
 
     // Crear categorías por defecto
+    @SuppressWarnings("null")
     public void initializeDefaultCategories() {
         if (repository.count() == 0) {
             List<Category> defaultCategories = List.of(

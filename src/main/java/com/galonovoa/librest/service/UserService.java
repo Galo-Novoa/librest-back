@@ -3,6 +3,8 @@ package com.galonovoa.librest.service;
 
 import com.galonovoa.librest.model.User;
 import com.galonovoa.librest.repository.UserRepository;
+
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +34,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(User user) {
+    public User updateUser(@NonNull User user) {
         return userRepository.save(user);
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<User> findById(@NonNull Long id) {
         return userRepository.findById(id);
     }
 }

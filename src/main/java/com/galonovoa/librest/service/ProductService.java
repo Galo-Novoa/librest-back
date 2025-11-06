@@ -2,6 +2,8 @@ package com.galonovoa.librest.service;
 
 import com.galonovoa.librest.model.Product;
 import com.galonovoa.librest.repository.ProductRepository;
+
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,15 +22,16 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Product saveProduct(Product p) {
+    public Product saveProduct(@NonNull Product p) {
         return repository.save(p);
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteProduct(@NonNull Long id) {
         repository.deleteById(id);
     }
 
-    public Product updateProductPartial(Long id, Map<String, Object> updates) {
+    @SuppressWarnings("null")
+    public Product updateProductPartial(@NonNull Long id, Map<String, Object> updates) {
         Product product = repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 

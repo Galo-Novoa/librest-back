@@ -6,6 +6,7 @@ import com.galonovoa.librest.service.ProductService;
 import com.galonovoa.librest.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -61,7 +62,7 @@ public class ProductController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Product> updateProductPartial(
-        @PathVariable Long id,
+        @PathVariable @NonNull Long id,
         @RequestBody Map<String, Object> updates
     ) {
         try {
@@ -74,7 +75,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@NonNull @PathVariable Long id) {
         try {
             // ✅ USAR service.deleteProduct()
             service.deleteProduct(id);
