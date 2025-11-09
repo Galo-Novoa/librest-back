@@ -4,11 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.github.cdimascio.dotenv.Dotenv;
 
-
 @SpringBootApplication
 public class LibrestBackApplication {
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
         System.setProperty("DB_HOST", dotenv.get("DB_HOST"));
         System.setProperty("DB_PORT", dotenv.get("DB_PORT"));

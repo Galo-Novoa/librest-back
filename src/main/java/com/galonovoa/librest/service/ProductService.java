@@ -41,7 +41,7 @@ public class ProductService {
     @SuppressWarnings("null")
     public Product updateProductPartial(@NonNull Long id, Map<String, Object> updates) {
         Product product = repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
         if (updates.get("name") != null) {
             product.setName(updates.get("name").toString());

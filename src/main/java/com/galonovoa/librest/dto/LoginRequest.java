@@ -4,7 +4,7 @@ package com.galonovoa.librest.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequest {
-    
+
     @NotBlank
     private String email;
 
@@ -12,9 +12,19 @@ public class LoginRequest {
     private String password;
 
     // Getters y Setters
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

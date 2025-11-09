@@ -21,8 +21,8 @@ public class AuthService {
     // Obtener el usuario actualmente autenticado
     public Optional<User> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated() && 
-            !authentication.getPrincipal().equals("anonymousUser")) {
+        if (authentication != null && authentication.isAuthenticated() &&
+                !authentication.getPrincipal().equals("anonymousUser")) {
             String email = authentication.getName();
             return userService.findByEmail(email);
         }
@@ -33,7 +33,7 @@ public class AuthService {
     public boolean isAdmin() {
         Optional<User> currentUser = getCurrentUser();
         return currentUser.map(user -> user.hasRole(ERole.ROLE_ADMIN))
-                         .orElse(false);
+                .orElse(false);
     }
 
     // Verificar si el usuario actual es el propietario del producto

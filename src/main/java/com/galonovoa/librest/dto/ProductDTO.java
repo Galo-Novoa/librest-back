@@ -9,7 +9,8 @@ public class ProductDTO {
     private String description;
     private String image;
 
-    public ProductDTO() {}
+    public ProductDTO() {
+    }
 
     public ProductDTO(String name, BigDecimal price, String description, String image) {
         this.name = name;
