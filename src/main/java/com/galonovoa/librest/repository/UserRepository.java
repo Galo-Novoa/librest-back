@@ -1,4 +1,3 @@
-// ./src/main/java/com/galonovoa/librest/repository/UserRepository.java
 package com.galonovoa.librest.repository;
 
 import com.galonovoa.librest.model.User;

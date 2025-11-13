@@ -3,6 +3,7 @@ package com.galonovoa.librest.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
@@ -15,6 +16,7 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonIgnore // ✅ EVITA RECURSIÓN INFINITA
     private List<Product> products = new ArrayList<>();
 
     public Category() {
